@@ -23,6 +23,11 @@ object AphexApi {
 
     val bindingFuture = Http().bindAndHandle(Routes.all, host, port)
 
+    bindingFuture.failed.foreach { t =>
+      println(s"Failed to bind to http://$host:$port/:") // scalastyle:off println
+      pprint.log(t)
+    }
+
     // let it run until user presses return
     println(s"Server online at http://$host:$port/\nPress RETURN to stop...") // scalastyle:off println
     StdIn.readLine()
