@@ -1,7 +1,6 @@
-package aphex.lierah.core.user.infrastructure.stub
+package aphex.lierah.core.module.user.domain
 
-import aphex.lierah.core.shared.infrastructure.stub.{IntStub, StringStub}
-import aphex.lierah.core.user.domain.UserName
+import aphex.lierah.core.module.shared.domain.{IntStub, StringStub}
 
 object UserNameStub {
   private val minimumChars = 1

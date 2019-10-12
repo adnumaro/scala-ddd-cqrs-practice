@@ -1,6 +1,4 @@
-package aphex.lierah.core.user.infrastructure.stub
-
-import aphex.lierah.core.user.domain.User
+package aphex.lierah.core.module.user.domain
 
 object UserStub {
   def apply(

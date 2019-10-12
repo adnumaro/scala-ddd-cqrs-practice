@@ -1,4 +1,4 @@
-package aphex.lierah.core.shared.infrastructure.stub
+package aphex.lierah.core.module.shared.domain
 
 import java.util.UUID
 

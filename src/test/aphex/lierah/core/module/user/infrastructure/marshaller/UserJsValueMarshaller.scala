@@ -1,10 +1,10 @@
-package aphex.lierah.core.user.infrastructure.marshaller
+package aphex.lierah.core.module.user.infrastructure.marshaller
 
 import spray.json.{JsArray, JsObject, JsString}
 
-import aphex.lierah.core.user.domain.User
+import aphex.lierah.core.module.user.domain.User
 
-object UserMarshaller {
+object UserJsValueMarshaller {
   def marshall(users: Seq[User]): JsArray = JsArray(
     users
       .map(

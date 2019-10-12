@@ -1,9 +1,8 @@
-package aphex.lierah.core.user.infrastructure.stub
+package aphex.lierah.core.module.user.domain
 
 import java.util.UUID
 
-import aphex.lierah.core.shared.infrastructure.stub.UuidStub
-import aphex.lierah.core.user.domain.UserId
+import aphex.lierah.core.module.shared.domain.UuidStub
 
 object UserIdStub {
   def apply(value: String): UserId = UserIdStub(UuidStub(value))
