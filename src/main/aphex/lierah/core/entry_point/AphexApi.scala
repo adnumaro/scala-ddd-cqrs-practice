@@ -1,4 +1,4 @@
-package aphex.lierah.core
+package aphex.lierah.core.entry_point
 
 import scala.concurrent.ExecutionContextExecutor
 import scala.io.StdIn
@@ -7,6 +7,8 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
 import com.typesafe.config.ConfigFactory
+
+import aphex.lierah.core.module.user.infrastructure.dependency_injection.UserModuleDependencyContainer
 
 object AphexApi {
   def main(args: Array[String]): Unit = {
@@ -21,7 +23,13 @@ object AphexApi {
     implicit val materializer: ActorMaterializer            = ActorMaterializer()
     implicit val executionContext: ExecutionContextExecutor = system.dispatcher
 
-    val bindingFuture = Http().bindAndHandle(Routes.all, host, port)
+    val container = new EntryPointDependencyContainer(
+      new UserModuleDependencyContainer
+    )
+
+    val routes = new Routes(container)
+
+    val bindingFuture = Http().bindAndHandle(routes.all, host, port)
 
     bindingFuture.failed.foreach { t =>
       println(s"Failed to bind to http://$host:$port/:") // scalastyle:off println
