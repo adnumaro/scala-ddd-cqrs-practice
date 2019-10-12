@@ -1,13 +1,13 @@
-package aphex.lierah.core.user.infrastructure
+package aphex.lierah.core.module.user.infrastructure.marshaller
 
 import java.util.UUID
 
 import spray.json.{DeserializationException, JsonFormat, JsString, JsValue, RootJsonFormat}
 import spray.json.DefaultJsonProtocol._
 
-import aphex.lierah.core.user.domain.{User, UserId, UserName}
+import aphex.lierah.core.module.user.domain.{User, UserId, UserName}
 
-object UserMarshaller {
+object UserJsonFormatMarshaller {
 
   implicit object UserNameMarshaller extends JsonFormat[UserName] {
     def write(value: UserName): JsValue = JsString(value.name)

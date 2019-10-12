@@ -1,4 +1,4 @@
-package aphex.lierah.core.user.domain
+package aphex.lierah.core.module.user.domain
 
 import java.util.UUID
 
