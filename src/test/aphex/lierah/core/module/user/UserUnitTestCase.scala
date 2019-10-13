@@ -1,5 +1,7 @@
 package aphex.lierah.core.module.user
 
+import scala.concurrent.Future
+
 import aphex.lierah.core.module.UnitTestCase
 import aphex.lierah.core.module.user.domain.{User, UserRepository}
 
@@ -9,5 +11,5 @@ protected[user] trait UserUnitTestCase extends UnitTestCase {
   protected def shouldSearchAllUsers(users: Seq[User]): Unit =
     (() => repository.all())
       .expects()
-      .returning(users)
+      .returning(Future.successful(users))
 }
