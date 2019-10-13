@@ -1,6 +1,6 @@
 package aphex.lierah.core.entry_point
 
-import scala.concurrent.ExecutionContextExecutor
+import scala.concurrent.ExecutionContext
 import scala.io.StdIn
 
 import akka.actor.ActorSystem
@@ -23,11 +23,11 @@ object AphexApi {
 
     val dbConfig = DbConfig(appConfig.getConfig("database"))
 
-    implicit val system: ActorSystem                        = ActorSystem(actorSystemName)
-    implicit val materializer: ActorMaterializer            = ActorMaterializer()
-    implicit val executionContext: ExecutionContextExecutor = system.dispatcher
+    val sharedDependencies = new SharedModuleDependencyContainer(actorSystemName, dbConfig)
 
-    val sharedDependencies = new SharedModuleDependencyContainer(dbConfig)
+    implicit val system: ActorSystem                = sharedDependencies.actorSystem
+    implicit val materializer: ActorMaterializer    = sharedDependencies.materializer
+    implicit val executionContext: ExecutionContext = sharedDependencies.executionContext
 
     val container = new EntryPointDependencyContainer(
       new UserModuleDependencyContainer(sharedDependencies.doobieDbConnection)
@@ -48,6 +48,6 @@ object AphexApi {
 
     bindingFuture
       .flatMap(_.unbind())
-      .onComplete(_ => system.terminate())
+      .onComplete(_ => sharedDependencies.actorSystem.terminate())
   }
 }

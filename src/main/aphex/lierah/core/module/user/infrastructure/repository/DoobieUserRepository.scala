@@ -10,7 +10,7 @@ import aphex.lierah.core.module.shared.infrastructure.persistence.doobie.TypesCo
 import aphex.lierah.core.module.user.domain.{User, UserRepository}
 
 final class DoobieUserRepository(db: DoobieDbConnection) extends UserRepository {
-  def all(): Future[Seq[User]] = {
+  override def all(): Future[Seq[User]] = {
     db.read(sql"SELECT user_id, name FROM users".query[User].to[Seq])
   }
 }

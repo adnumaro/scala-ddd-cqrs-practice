@@ -17,16 +17,15 @@ protected[entry_point] abstract class AcceptanceSpec
     with Matchers
     with ScalaFutures
     with ScalatestRouteTest {
-  private val appConfig = ConfigFactory.load("application")
-  private val dbConfig  = DbConfig(appConfig.getConfig("database"))
+  private val appConfig       = ConfigFactory.load("application")
+  private val dbConfig        = DbConfig(appConfig.getConfig("database"))
+  private val actorSystemName = "aphex-api-acceptance-test"
 
-  private val sharedDependencies = new SharedModuleDependencyContainer(dbConfig)
+  private val sharedDependencies = new SharedModuleDependencyContainer(actorSystemName, dbConfig)
 
-  private val routes = new Routes(
-    new EntryPointDependencyContainer(
-      new UserModuleDependencyContainer(sharedDependencies.doobieDbConnection)
-    )
-  )
+  private val userDependencies = new UserModuleDependencyContainer(sharedDependencies.doobieDbConnection)
+
+  private val routes = new Routes(new EntryPointDependencyContainer(userDependencies))
 
   protected val doobieDbConnection: DoobieDbConnection = sharedDependencies.doobieDbConnection
 

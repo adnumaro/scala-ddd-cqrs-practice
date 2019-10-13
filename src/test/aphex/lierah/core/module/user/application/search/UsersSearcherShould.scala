@@ -3,7 +3,7 @@ package aphex.lierah.core.module.user.application.search
 import aphex.lierah.core.module.user.UserUnitTestCase
 import aphex.lierah.core.module.user.domain.UserStub
 
-final class UsersSearcherTest extends UserUnitTestCase {
+final class UsersSearcherShould extends UserUnitTestCase {
   private val searcher = new UsersSearcher(repository)
 
   "Users Searcher" should {

@@ -10,7 +10,7 @@ import aphex.lierah.core.module.user.domain.{User, UserStub}
 import aphex.lierah.core.module.user.infrastructure.marshaller.UserJsValueMarshaller
 import aphex.lierah.core.module.shared.infrastructure.persistence.doobie.TypesConversions._
 
-final class UserSpec extends AcceptanceSpec {
+final class UserEntryPointShould extends AcceptanceSpec {
   private val expectedUsers = UserStub.randomSeq
 
   override def beforeAll(): Unit = {

@@ -2,7 +2,7 @@ package aphex.lierah.core.entry_point
 
 import akka.http.scaladsl.model._
 
-final class StatusSpec extends AcceptanceSpec {
+final class StatusEntryPointShould extends AcceptanceSpec {
   "ScalaHttpApi" should {
     "respond successfully while requesting its status" in getting("/status") {
       status shouldBe StatusCodes.OK
