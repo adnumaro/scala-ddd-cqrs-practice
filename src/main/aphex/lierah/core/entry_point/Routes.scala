@@ -4,9 +4,15 @@ import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 
 final class Routes(container: EntryPointDependencyContainer) {
-  val all: Route =
+  private val status =
     get {
-      path("status")(container.statusGetController.get()) ~
-        path("users")(container.userGetController.get())
+      path("status")(container.statusGetController.get())
     }
+
+  private val user =
+    get {
+      path("users")(container.userGetController.get())
+    }
+
+  val all: Route = status ~ user
 }

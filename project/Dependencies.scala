@@ -13,9 +13,10 @@ object Dependencies {
     "com.typesafe.akka"      %% "akka-http"            % Versions.akkaHttp,
     "com.typesafe.akka"      %% "akka-actor"           % Versions.akka,
     "com.typesafe.akka"      %% "akka-stream"          % Versions.akka,
-    "com.typesafe.akka"      %% "akka-http-spray-json" % Versions.akkaHttp
+    "com.typesafe.akka"      %% "akka-http-spray-json" % Versions.akkaHttp,
+    "org.tpolecat"           %% "doobie-core"          % "0.5.0",
+    "org.postgresql"         % "postgresql"            % "42.2.5"
   )
-
   val test = Seq(
     "org.scalatest"     %% "scalatest"         % "3.0.8"           % Test,
     "org.scalamock"     %% "scalamock"         % "4.4.0"           % Test,

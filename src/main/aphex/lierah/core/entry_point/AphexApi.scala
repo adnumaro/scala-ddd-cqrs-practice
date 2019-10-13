@@ -8,6 +8,8 @@ import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
 import com.typesafe.config.ConfigFactory
 
+import aphex.lierah.core.module.shared.infrastructure.config.DbConfig
+import aphex.lierah.core.module.shared.infrastructure.dependency_injection.SharedModuleDependencyContainer
 import aphex.lierah.core.module.user.infrastructure.dependency_injection.UserModuleDependencyContainer
 
 object AphexApi {
@@ -19,12 +21,16 @@ object AphexApi {
     val host            = serverConfig.getString("http-server.host")
     val port            = serverConfig.getInt("http-server.port")
 
+    val dbConfig = DbConfig(appConfig.getConfig("database"))
+
     implicit val system: ActorSystem                        = ActorSystem(actorSystemName)
     implicit val materializer: ActorMaterializer            = ActorMaterializer()
     implicit val executionContext: ExecutionContextExecutor = system.dispatcher
 
+    val sharedDependencies = new SharedModuleDependencyContainer(dbConfig)
+
     val container = new EntryPointDependencyContainer(
-      new UserModuleDependencyContainer
+      new UserModuleDependencyContainer(sharedDependencies.doobieDbConnection)
     )
 
     val routes = new Routes(container)
