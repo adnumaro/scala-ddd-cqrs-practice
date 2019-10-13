@@ -29,9 +29,9 @@ protected[entry_point] abstract class AcceptanceSpec
 
   protected val doobieDbConnection: DoobieDbConnection = sharedDependencies.doobieDbConnection
 
-  protected def getting[T](path: String)(body: T): T = Get(path) ~> routes.all ~> check(body)
+  protected def getting[T](path: String)(body: => T): T = Get(path) ~> routes.all ~> check(body)
 
-  protected def posting[T](path: String, request: String)(body: T): T =
+  protected def posting[T](path: String, request: String)(body: => T): T =
     HttpRequest(
       method = HttpMethods.POST,
       uri = path,
