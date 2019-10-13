@@ -45,10 +45,10 @@ object DbTablesCreator {
       val dbNameOption = for (grouped <- databaseNameFromUrlRegex findFirstMatchIn dbConfig.host) yield grouped group 1
 
       dbNameOption.fold(
-        println(s"[ERROR] We couldn't extract the DB name from the DB URL configuration parameter: ${dbConfig.host}")
+        println(s"[ERROR] We couldn't extract the DB name from the DB URL configuration parameter: ${dbConfig.host}") // scalastyle:off println
       ) { dbName =>
         Try(Class.forName(dbConfig.driver)).toOption.fold(
-          println(s"[ERROR] Invalid driver specified in the database config: ${dbConfig.driver}")
+          println(s"[ERROR] Invalid driver specified in the database config: ${dbConfig.driver}") // scalastyle:off println
         ) { _ =>
           val connection = DriverManager.getConnection(dbConfig.host, dbConfig.user, dbConfig.password)
 
@@ -64,7 +64,7 @@ object DbTablesCreator {
     val tablesFolderFile = new File(tablesFolder)
     val tablesFiles      = tablesFolderFile.listFiles()
 
-    println(s"[INFO] Creating the following tables: ${tablesFiles.mkString(", ")}…")
+    println(s"[INFO] Creating the following tables: ${tablesFiles.mkString(", ")}…") // scalastyle:off println
 
     val createTablesQueries = tablesFiles.map(fromFile(_).getLines.mkString)
 
