@@ -3,11 +3,11 @@ package aphex.lierah.core.entry_point.cli
 import java.io.File
 import java.sql.{Connection, DriverManager}
 
+import scala.io.Source._
 import scala.util.matching.Regex
+import scala.util.Try
 
 import com.typesafe.config.ConfigFactory
-import scala.io.Source._
-import scala.util.Try
 
 import aphex.lierah.core.module.shared.infrastructure.config.DbConfig
 
@@ -17,12 +17,6 @@ import aphex.lierah.core.module.shared.infrastructure.config.DbConfig
   */
 object DbTablesCreator {
   private val databaseNameFromUrlRegex = new Regex("""\w+:\w+:\/\/\d+.\d+.\d+.\d+(?::\w+)?\/(\w+)""")
-
-  case class CommandConfig(
-      tablesFolder: String = "database",
-      configFile: String = "application",
-      dbConfigKey: String = "database"
-  )
 
   def main(args: Array[String]): Unit = {
     val parser = new scopt.OptionParser[CommandConfig]("DbTablesCreator") {
@@ -40,24 +34,27 @@ object DbTablesCreator {
         .text("The configuration key inside the configuration file where we'll find the DB connection parameters.")
     }
 
-    parser.parse(args, CommandConfig()).fold(println("[ERROR] Invalid parameters")) { commandConfig =>
-      val dbConfig     = DbConfig(ConfigFactory.load("application").getConfig("database"))
-      val dbNameOption = for (grouped <- databaseNameFromUrlRegex findFirstMatchIn dbConfig.host) yield grouped group 1
+    parser
+      .parse(args, CommandConfig())
+      .fold(println("[ERROR] Invalid parameters")) { commandConfig => // scalastyle:off println
+        val dbConfig = DbConfig(ConfigFactory.load("application").getConfig("database"))
+        val dbNameOption = for (grouped <- databaseNameFromUrlRegex findFirstMatchIn dbConfig.host)
+          yield grouped group 1
 
-      dbNameOption.fold(
-        println(s"[ERROR] We couldn't extract the DB name from the DB URL configuration parameter: ${dbConfig.host}") // scalastyle:off println
-      ) { dbName =>
-        Try(Class.forName(dbConfig.driver)).toOption.fold(
-          println(s"[ERROR] Invalid driver specified in the database config: ${dbConfig.driver}") // scalastyle:off println
-        ) { _ =>
-          val connection = DriverManager.getConnection(dbConfig.host, dbConfig.user, dbConfig.password)
+        dbNameOption.fold(
+          println(s"[ERROR] We couldn't extract the DB name from the DB URL configuration parameter: ${dbConfig.host}") // scalastyle:off println
+        ) { dbName =>
+          Try(Class.forName(dbConfig.driver)).toOption.fold( // scalastyle:off classforname
+            println(s"[ERROR] Invalid driver specified in the database config: ${dbConfig.driver}") // scalastyle:off println
+          ) { _ =>
+            val connection = DriverManager.getConnection(dbConfig.host, dbConfig.user, dbConfig.password)
 
-          createTables(commandConfig.tablesFolder, connection)
+            createTables(commandConfig.tablesFolder, connection)
 
-          connection.close()
+            connection.close()
+          }
         }
       }
-    }
   }
 
   private def createTables(tablesFolder: String, connection: Connection): Unit = {
@@ -74,4 +71,10 @@ object DbTablesCreator {
     applySchemaStatement.executeUpdate(s"")
     createTablesQueries.foreach(applySchemaStatement.executeUpdate)
   }
+
+  case class CommandConfig(
+      tablesFolder: String = "database",
+      configFile: String = "application",
+      dbConfigKey: String = "database"
+  )
 }
