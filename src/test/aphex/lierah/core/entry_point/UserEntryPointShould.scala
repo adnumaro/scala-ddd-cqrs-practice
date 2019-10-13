@@ -1,14 +1,14 @@
 package aphex.lierah.core.entry_point
 
 import akka.http.scaladsl.model._
+import cats.implicits._
+import doobie.implicits._
 import doobie.util.update.Update
 import spray.json._
-import doobie.implicits._
-import cats.implicits._
 
+import aphex.lierah.core.module.shared.infrastructure.persistence.doobie.TypesConversions._
 import aphex.lierah.core.module.user.domain.{User, UserStub}
 import aphex.lierah.core.module.user.infrastructure.marshaller.UserJsValueMarshaller
-import aphex.lierah.core.module.shared.infrastructure.persistence.doobie.TypesConversions._
 
 final class UserEntryPointShould extends AcceptanceSpec {
   private val expectedUsers = UserStub.randomSeq

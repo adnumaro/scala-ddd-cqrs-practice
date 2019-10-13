@@ -6,7 +6,6 @@ import doobie.implicits._
 
 import aphex.lierah.core.module.shared.infrastructure.persistence.doobie.DoobieDbConnection
 import aphex.lierah.core.module.shared.infrastructure.persistence.doobie.TypesConversions._
-
 import aphex.lierah.core.module.user.domain.{User, UserRepository}
 
 final class DoobieUserRepository(db: DoobieDbConnection) extends UserRepository {

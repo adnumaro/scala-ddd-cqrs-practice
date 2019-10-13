@@ -5,7 +5,7 @@ import aphex.lierah.core.entry_point.controller.user.UserGetController
 import aphex.lierah.core.module.user.infrastructure.dependency_injection.UserModuleDependencyContainer
 
 final class EntryPointDependencyContainer(
-    userDependencies: UserModuleDependencyContainer,
+    userDependencies: UserModuleDependencyContainer
 ) {
   val statusGetController = new StatusGetController
 

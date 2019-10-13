@@ -5,13 +5,11 @@ object Configuration {
   val settings = Seq(
     organization := "aphex.lierah",
     scalaVersion := "2.12.4",
-
     // Custom folders path (/src/main/scala and /src/test/scala by default)
     mainClass in Compile := Some("aphex.lierah.core.entry_point.AphexApi"),
     scalaSource in Compile := baseDirectory.value / "/src/main",
     scalaSource in Test := baseDirectory.value / "/src/test",
     resourceDirectory in Compile := baseDirectory.value / "conf",
-
     // Compiler options
     scalacOptions ++= Seq(
       "-deprecation", // Warnings deprecation
@@ -27,7 +25,6 @@ object Configuration {
     // Remove it in production because it's expensive
     scalacOptions in run in Compile -= "-Xcheckinit",
     javaOptions += "-Duser.timezone=UTC",
-
     // Test options
     parallelExecution in Test := false,
     testForkedParallel in Test := false,

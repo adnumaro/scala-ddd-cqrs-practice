@@ -4,9 +4,9 @@ import cats.implicits._
 import doobie.implicits._
 import doobie.util.update.Update
 
+import aphex.lierah.core.module.shared.infrastructure.persistence.doobie.TypesConversions._
 import aphex.lierah.core.module.user.UserIntegrationTestCase
 import aphex.lierah.core.module.user.domain.{User, UserStub}
-import aphex.lierah.core.module.shared.infrastructure.persistence.doobie.TypesConversions._
 
 final class DoobieUserRepositoryTest extends UserIntegrationTestCase {
   private def insert(users: Seq[User]) =

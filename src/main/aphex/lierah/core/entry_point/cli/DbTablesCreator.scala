@@ -4,8 +4,8 @@ import java.io.File
 import java.sql.{Connection, DriverManager}
 
 import scala.io.Source._
-import scala.util.matching.Regex
 import scala.util.Try
+import scala.util.matching.Regex
 
 import com.typesafe.config.ConfigFactory
 
@@ -16,6 +16,7 @@ import aphex.lierah.core.module.shared.infrastructure.config.DbConfig
   * Execute: runMain aphex.lierah.core.entry_point.cli.DbTablesCreator
   */
 object DbTablesCreator {
+  // scalastyle:off
   private val databaseNameFromUrlRegex = new Regex("""\w+:\w+:\/\/\d+.\d+.\d+.\d+(?::\w+)?\/(\w+)""")
 
   def main(args: Array[String]): Unit = {
@@ -36,16 +37,16 @@ object DbTablesCreator {
 
     parser
       .parse(args, CommandConfig())
-      .fold(println("[ERROR] Invalid parameters")) { commandConfig => // scalastyle:off println
+      .fold(println("[ERROR] Invalid parameters")) { commandConfig =>
         val dbConfig = DbConfig(ConfigFactory.load("application").getConfig("database"))
         val dbNameOption = for (grouped <- databaseNameFromUrlRegex findFirstMatchIn dbConfig.host)
           yield grouped group 1
 
         dbNameOption.fold(
-          println(s"[ERROR] We couldn't extract the DB name from the DB URL configuration parameter: ${dbConfig.host}") // scalastyle:off println
+          println(s"[ERROR] We couldn't extract the DB name from the DB URL configuration parameter: ${dbConfig.host}")
         ) { dbName =>
-          Try(Class.forName(dbConfig.driver)).toOption.fold( // scalastyle:off classforname
-            println(s"[ERROR] Invalid driver specified in the database config: ${dbConfig.driver}") // scalastyle:off println
+          Try(Class.forName(dbConfig.driver)).toOption.fold(
+            println(s"[ERROR] Invalid driver specified in the database config: ${dbConfig.driver}")
           ) { _ =>
             val connection = DriverManager.getConnection(dbConfig.host, dbConfig.user, dbConfig.password)
 
@@ -61,7 +62,7 @@ object DbTablesCreator {
     val tablesFolderFile = new File(tablesFolder)
     val tablesFiles      = tablesFolderFile.listFiles()
 
-    println(s"[INFO] Creating the following tables: ${tablesFiles.mkString(", ")}…") // scalastyle:off println
+    println(s"[INFO] Creating the following tables: ${tablesFiles.mkString(", ")}…")
 
     val createTablesQueries = tablesFiles.map(fromFile(_).getLines.mkString)
 
@@ -77,4 +78,6 @@ object DbTablesCreator {
       configFile: String = "application",
       dbConfigKey: String = "database"
   )
+
+  // scalastyle:on
 }

@@ -13,7 +13,8 @@ protected[core] trait IntegrationTestCase extends UnitTestCase {
   private val dbConfig        = DbConfig(appConfig.getConfig("database"))
   private val actorSystemName = "aphex-api-integration-test"
 
-  protected val sharedDependencies                          = new SharedModuleDependencyContainer(actorSystemName, dbConfig)
+  protected val sharedDependencies = new SharedModuleDependencyContainer(actorSystemName, dbConfig)
+
   implicit protected val executionContext: ExecutionContext = sharedDependencies.executionContext
 
   protected val doobieDbConnection: DoobieDbConnection = sharedDependencies.doobieDbConnection
