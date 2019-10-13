@@ -1,5 +1,8 @@
 language: scala
 
+services:
+  - docker
+
 scala:
   - 2.12.4
 
@@ -11,3 +14,20 @@ cache:
   directories:
     - $HOME/.ivy2/cache
     - $HOME/.sbt/boot/
+
+before_install:
+  - cd docker/
+  - cp .env.dist .env
+  - docker-compose up -d
+  - cd ..
+  - sbt runMain aphex.lierah.core.entry_point.cli.DbTablesCreator
+
+script:
+  - docker --version
+
+  ## Execute the tests
+  - sbt -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M test
+
+  # Tricks to avoid unnecessary cache updates
+  - find $HOME/.sbt -name "*.lock" | xargs rm
+  - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
