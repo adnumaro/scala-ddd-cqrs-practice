@@ -1,3 +1,6 @@
+# ide
+.idea
+
 # scala
 *.class
 *.log
@@ -13,4 +16,6 @@ src_managed/
 project/boot/
 project/plugins/project/
 native/
-.idea
+
+# environment
+.env
