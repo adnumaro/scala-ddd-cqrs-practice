@@ -20,11 +20,9 @@ before_install:
   - cp .env.dist .env
   - docker-compose up -d
   - cd ..
-  - sbt runMain aphex.lierah.core.entry_point.cli.DbTablesCreator
+  - sbt createDbTables
 
 script:
-  - docker --version
-
   ## Execute the tests
   - sbt -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M test
 

@@ -25,3 +25,7 @@ addCommandAlias("ft", "scalafmtTest")
 
 // All the needed tasks before running the test
 addCommandAlias("prep", ";c;tc;s;ts;ft")
+
+TaskKey[Unit]("createDbTables") := (runMain in Compile)
+  .toTask(" aphex.lierah.core.entry_point.cli.DbTablesCreator")
+  .value
