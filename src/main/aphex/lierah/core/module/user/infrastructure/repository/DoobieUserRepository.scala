@@ -11,11 +11,14 @@ import aphex.lierah.core.module.user.domain.{User, UserRepository}
 final class DoobieUserRepository(db: DoobieDbConnection)(implicit executionContext: ExecutionContext)
     extends UserRepository {
   override def all(): Future[Seq[User]] = {
-    db.read(sql"SELECT user_id, name FROM users".query[User].to[Seq])
+    db.read(sql"SELECT uuid, username, email, password FROM users".query[User].to[Seq])
   }
 
   override def save(user: User): Future[Unit] =
-    sql"INSERT INTO users(user_id, name) VALUES (${user.id}, ${user.name})".update.run
+    sql"""
+       INSERT INTO users(uuid, username, email, password)
+       VALUES (${user.uuid}, ${user.username}, ${user.email}, ${user.password})
+      """.update.run
       .transact(db.transactor)
       .unsafeToFuture()
       .map(_ => ())

@@ -11,6 +11,11 @@ final class UserRegistererShould extends UserUnitTestCase {
 
     repositoryShouldSave(user)
 
-    registerer.register(user.id, user.name) shouldBe (())
+    registerer.register(
+      user.uuid,
+      user.username,
+      user.email,
+      user.password
+    ) shouldBe (())
   }
 }

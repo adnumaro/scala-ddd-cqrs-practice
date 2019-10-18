@@ -10,8 +10,10 @@ object UserJsValueMarshaller {
       .map(
         user =>
           JsObject(
-            "id"   -> JsString(user.id.value.toString),
-            "name" -> JsString(user.name.name)
+            "uuid"     -> JsString(user.uuid.uuid.toString),
+            "username" -> JsString(user.username.username),
+            "email"    -> JsString(user.email.email),
+            "password" -> JsString(user.password.password)
         ))
       .toVector
   )

@@ -11,12 +11,12 @@ import com.typesafe.config.ConfigFactory
 
 import aphex.lierah.core.module.shared.infrastructure.config.DbConfig
 
+// scalastyle:off
 /**
   * View usage: runMain aphex.lierah.core.entry_point.cli.DbTablesCreator --usage
   * Execute: runMain aphex.lierah.core.entry_point.cli.DbTablesCreator
   */
 object DbTablesCreator {
-  // scalastyle:off
   private val databaseNameFromUrlRegex = new Regex("""\w+:\w+:\/\/\d+.\d+.\d+.\d+(?::\w+)?\/(\w+)""")
 
   def main(args: Array[String]): Unit = {
@@ -78,6 +78,5 @@ object DbTablesCreator {
       configFile: String = "application",
       dbConfigKey: String = "database"
   )
-
-  // scalastyle:on
 }
+// scalastyle:on

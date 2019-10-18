@@ -1,6 +1,8 @@
 CREATE TABLE users (
-    user_id CHAR(36) NOT NULL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    uuid CHAR(36) NOT NULL PRIMARY KEY,
+    username VARCHAR(30) NOT NULL,
+    email VARCHAR(30) NOT NULL,
+    password VARCHAR(60) NOT NULL,
     created_at TIMESTAMP  NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP  NOT NULL DEFAULT NOW()
 );

@@ -19,8 +19,10 @@ final class Routes(container: EntryPointDependencyContainer) {
         path("users") {
           jsonBody { body =>
             container.userPostController.post(
-              body("id").convertTo[String],
-              body("name").convertTo[String]
+              body("uuid").convertTo[String],
+              body("username").convertTo[String],
+              body("email").convertTo[String],
+              body("password").convertTo[String]
             )
           }
         }

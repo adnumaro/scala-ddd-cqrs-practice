@@ -6,11 +6,16 @@ import akka.http.scaladsl.server.Directives.complete
 import akka.http.scaladsl.server.StandardRoute
 
 import aphex.lierah.core.module.user.application.register.UserRegisterer
-import aphex.lierah.core.module.user.domain.{UserId, UserName}
+import aphex.lierah.core.module.user.domain.value_object._
 
 final class UserPostController(registerer: UserRegisterer) {
-  def post(id: String, name: String): StandardRoute = {
-    registerer.register(UserId(id), UserName(name))
+  def post(uuid: String, username: String, email: String, password: String): StandardRoute = {
+    registerer.register(
+      UserUuid(uuid),
+      UserUsername(username),
+      UserEmail(email),
+      UserPassword(password)
+    )
 
     complete(HttpResponse(NoContent))
   }

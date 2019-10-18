@@ -18,8 +18,10 @@ final class UserEntryPointShould extends AcceptanceSpec {
     "/users",
     """
       |{
-      |  "id": "a11098af-d352-4cce-8372-2b48b97e6942",
-      |  "name": "Aphex user"
+      |  "uuid": "a11098af-d352-4cce-8372-2b48b97e6942",
+      |  "username": "Aphex user",
+      |  "email": "aphex@lierah.com",
+      |  "password": "Aphex@Lierah17user"
       |}
     """.stripMargin
   ) {

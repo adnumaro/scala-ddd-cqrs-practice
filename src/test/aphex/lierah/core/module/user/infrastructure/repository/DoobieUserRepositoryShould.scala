@@ -5,7 +5,7 @@ import doobie.implicits._
 import aphex.lierah.core.module.user.UserIntegrationTestCase
 import aphex.lierah.core.module.user.domain.UserStub
 
-final class DoobieUserRepositoryTest extends UserIntegrationTestCase {
+final class DoobieUserRepositoryShould extends UserIntegrationTestCase {
   private def cleanUsersTable() =
     sql"TRUNCATE TABLE users".update.run
       .transact(doobieDbConnection.transactor)
@@ -23,7 +23,7 @@ final class DoobieUserRepositoryTest extends UserIntegrationTestCase {
 
     val users = UserStub.randomSeq
 
-    users.foreach(u => repository.save(u).futureValue)
+    users.foreach(user => repository.save(user).futureValue)
 
     repository.all().futureValue shouldBe users
   }
