@@ -6,15 +6,13 @@ import aphex.lierah.core.module.user.domain.UserStub
 final class UsersSearcherShould extends UserUnitTestCase {
   private val searcher = new UsersSearcher(repository)
 
-  "Users Searcher" should {
-    "search all existing users" in {
-      val existingUser        = UserStub.random
-      val anotherExistingUser = UserStub.random
-      val existingUsers       = Seq(existingUser, anotherExistingUser)
+  "search all existing users" in {
+    val user        = UserStub.random
+    val anotherUser = UserStub.random
+    val users       = Seq(user, anotherUser)
 
-      shouldSearchAllUsers(existingUsers)
+    repositoryShouldFind(users)
 
-      searcher.all().futureValue should be(existingUsers)
-    }
+    searcher.all().futureValue shouldBe users
   }
 }
