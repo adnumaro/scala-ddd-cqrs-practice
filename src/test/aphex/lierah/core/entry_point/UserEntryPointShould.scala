@@ -19,7 +19,7 @@ final class UserEntryPointShould extends AcceptanceSpec {
     """
       |{
       |  "id": "a11098af-d352-4cce-8372-2b48b97e6942",
-      |  "name": "Codelyver ✌️"
+      |  "name": "Aphex user"
       |}
     """.stripMargin
   ) {
