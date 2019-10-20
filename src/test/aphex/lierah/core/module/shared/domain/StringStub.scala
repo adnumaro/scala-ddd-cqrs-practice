@@ -11,7 +11,7 @@ object StringStub {
   val specialChars = "@#&_-"
 
   def random(length: Int, minUpper: Int = 0, minLower: Int = 0, minNum: Int = 0, minSpecial: Int = 0): String = {
-    val all = upperAlpha + lowerAlpha + numbers + specialChars
+    val all    = upperAlpha + lowerAlpha + numbers + specialChars
     val result = generateRandom(length, all)
 
     addComplexityByRules(result, minUpper, minLower, minNum, minSpecial)
@@ -19,22 +19,9 @@ object StringStub {
 
   def randomAlphaNumeric(length: Int, minUpper: Int = 0, minLower: Int = 0, minNum: Int = 0): String = {
     val alphaNumeric = upperAlpha + lowerAlpha + numbers
-    val result = generateRandom(length, alphaNumeric)
+    val result       = generateRandom(length, alphaNumeric)
 
     addComplexityByRules(result, minUpper, minLower, minNum)
-  }
-
-  def randomAlpha(length: Int, minUpper: Int = 0, minLower: Int = 0): String = {
-    val alpha = upperAlpha + lowerAlpha
-    val result = generateRandom(length, alpha)
-
-    addComplexityByRules(result, minUpper, minLower)
-  }
-
-  def randomLowerAlpha(length: Int, minLower: Int = 0): String = {
-    val result = generateRandom(length, lowerAlpha)
-
-    addComplexityByRules(result, minLower)
   }
 
   def generateRandom(length: Int, chars: String): String =
@@ -56,5 +43,18 @@ object StringStub {
     if (minSpecial > 0 && !validRandom.matches(s"(.*?[@#&\\_-]){${minSpecial},}")) validRandom += "@"
 
     validRandom
+  }
+
+  def randomAlpha(length: Int, minUpper: Int = 0, minLower: Int = 0): String = {
+    val alpha  = upperAlpha + lowerAlpha
+    val result = generateRandom(length, alpha)
+
+    addComplexityByRules(result, minUpper, minLower)
+  }
+
+  def randomLowerAlpha(length: Int, minLower: Int = 0): String = {
+    val result = generateRandom(length, lowerAlpha)
+
+    addComplexityByRules(result, minLower)
   }
 }

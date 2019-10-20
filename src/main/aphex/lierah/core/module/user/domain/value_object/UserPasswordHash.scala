@@ -7,5 +7,5 @@ case class UserPasswordHash(passwordHashed: String) {
 }
 
 object UserPasswordHash {
-  def apply(passwordHashed: String) = new UserPasswordHash(passwordHashed)
+  def apply(passwordHashed: String): UserPasswordHash = new UserPasswordHash(passwordHashed)
 }
