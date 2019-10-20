@@ -13,7 +13,7 @@ object UserJsValueMarshaller {
             "uuid"     -> JsString(user.uuid.uuid.toString),
             "username" -> JsString(user.username.username),
             "email"    -> JsString(user.email.email),
-            "password" -> JsString(user.password.password)
+            "password" -> JsString(user.password.passwordHashed)
         ))
       .toVector
   )

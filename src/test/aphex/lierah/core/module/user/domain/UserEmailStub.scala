@@ -10,7 +10,7 @@ object UserEmailStub {
   def apply(value: String): UserEmail = UserEmail(value)
 
   def random: UserEmail = UserEmail(
-    StringStub.random(numChars = IntStub.randomBetween(minimumChars, maximumChars)) + "@" +
-      StringStub.random(numChars = IntStub.randomBetween(minimumChars, maximumChars)) + ".com"
+    StringStub.randomLowerAlpha(length = IntStub.randomBetween(minimumChars, maximumChars)) + "@" +
+      StringStub.randomLowerAlpha(length = IntStub.randomBetween(minimumChars, maximumChars)) + ".com"
   )
 }

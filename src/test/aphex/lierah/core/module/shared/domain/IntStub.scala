@@ -7,5 +7,5 @@ object IntStub {
 
   def randomUnsigned(max: Int = Int.MaxValue - 1): Int = randomBetween(min = 0, max = max)
 
-  def randomBetween(min: Int, max: Int): Int = Random.nextInt((max - min) + 1)
+  def randomBetween(min: Int, max: Int): Int = min + Random.nextInt((max - min) + 1)
 }

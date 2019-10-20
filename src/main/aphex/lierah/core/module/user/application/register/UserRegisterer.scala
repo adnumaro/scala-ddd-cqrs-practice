@@ -8,7 +8,7 @@ final class UserRegisterer(repository: UserRepository) {
       uuid: UserUuid,
       username: UserUsername,
       email: UserEmail,
-      password: UserPassword
+      password: UserPasswordHash
   ): Unit = {
     val user = User(uuid, username, email, password)
 

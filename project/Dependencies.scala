@@ -16,7 +16,8 @@ object Dependencies {
     "com.typesafe.akka"      %% "akka-http-spray-json" % Versions.akkaHttp,
     "org.tpolecat"           %% "doobie-core"          % "0.5.0",
     "org.postgresql"         % "postgresql"            % "42.2.5",
-    "com.github.scopt"       %% "scopt"                % "3.7.0"
+    "com.github.scopt"       %% "scopt"                % "3.7.0",
+    "org.mindrot"            % "jbcrypt"               % "0.4"
   )
   val test = Seq(
     "org.scalatest"     %% "scalatest"         % "3.0.8"           % Test,

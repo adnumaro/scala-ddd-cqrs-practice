@@ -28,11 +28,11 @@ object UserJsonFormatMarshaller {
     }
   }
 
-  implicit object UserPasswordMarshaller extends JsonFormat[UserPassword] {
-    def write(value: UserPassword): JsValue = JsString(value.password)
+  implicit object UserPasswordHashedMarshaller extends JsonFormat[UserPasswordHash] {
+    def write(value: UserPasswordHash): JsValue = JsString(value.passwordHashed)
 
-    def read(value: JsValue): UserPassword = value match {
-      case JsString(password) => UserPassword(password)
+    def read(value: JsValue): UserPasswordHash = value match {
+      case JsString(password) => UserPasswordHash(password)
       case _                  => throw DeserializationException("Expected 1 string for UserPassword")
     }
   }
@@ -56,5 +56,5 @@ object UserJsonFormatMarshaller {
   }
 
   implicit val userFormat: RootJsonFormat[User] = jsonFormat4(
-    User.apply(_: UserUuid, _: UserUsername, _: UserEmail, _: UserPassword))
+    User.apply(_: UserUuid, _: UserUsername, _: UserEmail, _: UserPasswordHash))
 }
