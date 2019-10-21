@@ -2,8 +2,8 @@ package aphex.lierah.core.module.shared.domain
 
 import org.mindrot.jbcrypt.BCrypt
 
-case class Encrypter() {
-  def hashPassword(plainPassword: String): String = BCrypt.hashpw(plainPassword, BCrypt.gensalt)
+case class Encrypter(plainPassword: String) {
+  val hash: String = BCrypt.hashpw(plainPassword, BCrypt.gensalt)
 
-  def check(plainPassword: String, passwordHashed: String): Boolean = BCrypt.checkpw(plainPassword, passwordHashed)
+  def isEqualsTo(passwordHashed: String): Boolean = BCrypt.checkpw(plainPassword, passwordHashed)
 }

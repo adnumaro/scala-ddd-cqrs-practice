@@ -7,7 +7,7 @@ object UserPassword {
 
   def apply(plainPassword: String): UserPasswordHash = plainPassword match {
     case plainPassword if plainPassword.matches(Pattern) =>
-      new UserPasswordHash(Encrypter().hashPassword(plainPassword))
+      new UserPasswordHash(Encrypter(plainPassword).hash)
     case _ => throw new Exception(s"Password ${plainPassword} is invalid")
   }
 }
