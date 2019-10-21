@@ -4,7 +4,7 @@ import sbt.Keys._
 object Configuration {
   val settings = Seq(
     organization := "aphex.lierah",
-    scalaVersion := "2.12.4",
+    scalaVersion := "2.12.9",
     // Custom folders path (/src/main/scala and /src/test/scala by default)
     mainClass in Compile := Some("aphex.lierah.core.entry_point.AphexApi"),
     scalaSource in Compile := baseDirectory.value / "/src/main",
