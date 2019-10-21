@@ -13,7 +13,7 @@ object UserPasswordStub {
     StringStub.random(length = IntStub.randomBetween(minimumChars, maximumChars),
                       minLower = 1,
                       minUpper = 1,
-                      minNum = 2,
+                      minNum = 1,
                       minSpecial = 1)
   )
 }
