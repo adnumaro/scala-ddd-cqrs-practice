@@ -24,27 +24,6 @@ object StringStub {
     addComplexityByRules(result, minUpper, minLower, minNum)
   }
 
-  def generateRandom(length: Int, chars: String): String =
-    (1 to length).map(_ => chars(Random.nextInt.abs % chars.length)).mkString
-
-  def addComplexityByRules(random: String,
-                           minUpper: Int = 0,
-                           minLower: Int = 0,
-                           minNum: Int = 0,
-                           minSpecial: Int = 0): String = {
-    var validRandom = random
-
-    if (minUpper > 0 && !validRandom.matches(s"(.*?[A-Z]){${minUpper},}")) validRandom += "A"
-
-    if (minLower > 0 && !validRandom.matches(s"(.*?[a-z]){${minUpper},}")) validRandom += "a"
-
-    if (minNum > 0 && !validRandom.matches(s"(.*?[0-9]){${minUpper},}")) validRandom += "1"
-
-    if (minSpecial > 0 && !validRandom.matches(s"(.*?[@#&\\_-]){${minSpecial},}")) validRandom += "@"
-
-    validRandom
-  }
-
   def randomAlpha(length: Int, minUpper: Int = 0, minLower: Int = 0): String = {
     val alpha  = upperAlpha + lowerAlpha
     val result = generateRandom(length, alpha)
@@ -57,4 +36,32 @@ object StringStub {
 
     addComplexityByRules(result, minLower)
   }
+
+  def addComplexityByRules(random: String,
+                           minUpper: Int = 0,
+                           minLower: Int = 0,
+                           minNum: Int = 0,
+                           minSpecial: Int = 0): String = {
+    val randomSeq = random.toSeq
+
+    val upperCharList   = randomSeq.filter(Character.isUpperCase)
+    val lowerCharList   = randomSeq.filter(Character.isLowerCase)
+    val numberCharList  = randomSeq.filter(Character.isDigit)
+    val specialCharList = randomSeq.filter(char => specialChars.contains(char))
+
+    val validRandom = random
+
+    if (minUpper < upperCharList.size) validRandom ++ generateRandom(minUpper - upperCharList.size, upperAlpha)
+
+    if (minLower < lowerCharList.size) validRandom ++ generateRandom(minUpper - lowerCharList.size, lowerAlpha)
+
+    if (minNum < numberCharList.size) validRandom ++ generateRandom(minUpper - numberCharList.size, numbers)
+
+    if (minSpecial < specialCharList.size) validRandom ++ generateRandom(minUpper - specialCharList.size, specialChars)
+
+    validRandom
+  }
+
+  def generateRandom(length: Int, chars: String): String =
+    (1 to length).map(_ => chars(Random.nextInt.abs % chars.length)).mkString
 }
