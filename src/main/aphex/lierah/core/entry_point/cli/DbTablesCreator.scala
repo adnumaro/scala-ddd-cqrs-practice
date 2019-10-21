@@ -44,7 +44,7 @@ object DbTablesCreator {
 
         dbNameOption.fold(
           println(s"[ERROR] We couldn't extract the DB name from the DB URL configuration parameter: ${dbConfig.host}")
-        ) { dbName =>
+        ) { _ =>
           Try(Class.forName(dbConfig.driver)).toOption.fold(
             println(s"[ERROR] Invalid driver specified in the database config: ${dbConfig.driver}")
           ) { _ =>
