@@ -21,10 +21,10 @@ addCommandAlias("ts", "test:scalastyle")
 addCommandAlias("f", "scalafmt")
 
 // Test if all files are formatted according to ScalaFmt
-addCommandAlias("ft", "scalafmtTest")
+addCommandAlias("tf", "test:scalafmt")
 
 // All the needed tasks before running the test
-addCommandAlias("prep", ";c;tc;s;ts;ft")
+addCommandAlias("prep", ";clean;c;tc;s;ts;f;tf")
 
 TaskKey[Unit]("createDbTables") := (runMain in Compile)
   .toTask(" aphex.lierah.core.entry_point.cli.DbTablesCreator")
