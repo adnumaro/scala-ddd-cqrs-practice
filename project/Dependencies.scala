@@ -3,15 +3,15 @@ import sbt._
 object Dependencies {
 
   val production = Seq(
-    "com.github.nscala-time" %% "nscala-time"          % "2.18.0",
-    "com.lihaoyi"            %% "pprint"               % "0.5.3",
+    "com.github.nscala-time" %% "nscala-time"          % "2.22.0",
+    "com.lihaoyi"            %% "pprint"               % "0.5.5",
     "com.typesafe.akka"      %% "akka-http"            % Versions.akkaHttp,
     "com.typesafe.akka"      %% "akka-actor"           % Versions.akka,
     "com.typesafe.akka"      %% "akka-stream"          % Versions.akka,
     "com.typesafe.akka"      %% "akka-http-spray-json" % Versions.akkaHttp,
-    "org.tpolecat"           %% "doobie-core"          % "0.5.0",
-    "org.postgresql"         % "postgresql"            % "42.2.5",
-    "com.github.scopt"       %% "scopt"                % "3.7.0",
+    "org.tpolecat"           %% "doobie-core"          % "0.8.4",
+    "org.postgresql"         % "postgresql"            % "42.2.8",
+    "com.github.scopt"       %% "scopt"                % "4.0.0-RC2",
     "org.mindrot"            % "jbcrypt"               % "0.4"
   )
   val test = Seq(
@@ -23,7 +23,7 @@ object Dependencies {
   )
 
   object Versions {
-    val akka     = "2.5.25"
+    val akka     = "2.5.26"
     val akkaHttp = "10.1.10"
   }
 }

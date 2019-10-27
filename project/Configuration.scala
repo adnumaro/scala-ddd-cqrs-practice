@@ -4,7 +4,7 @@ import sbt.Keys._
 object Configuration {
   val settings = Seq(
     organization := "aphex.lierah",
-    scalaVersion := "2.12.9",
+    scalaVersion := "2.13.1",
     // Custom folders path (/src/main/scala and /src/test/scala by default)
     mainClass in Compile := Some("aphex.lierah.core.entry_point.AphexApi"),
     scalaSource in Compile := baseDirectory.value / "/src/main",
@@ -19,7 +19,6 @@ object Configuration {
       "-Xfatal-warnings", // Warnings became errors
       "-Ywarn-dead-code",
       "-Ywarn-unused",
-      "-Ywarn-unused-import",
       "-Xcheckinit" // Check against early initialization
     ),
     // Remove it in production because it's expensive
