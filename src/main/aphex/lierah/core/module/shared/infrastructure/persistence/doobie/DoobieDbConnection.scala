@@ -2,8 +2,8 @@ package aphex.lierah.core.module.shared.infrastructure.persistence.doobie
 
 import cats.effect.{Blocker, IO}
 import doobie.Transactor
-import doobie.util.transactor.Transactor.Aux
 import doobie.util.ExecutionContexts
+import doobie.util.transactor.Transactor.Aux
 
 import aphex.lierah.core.module.shared.infrastructure.config.DbConfig
 
