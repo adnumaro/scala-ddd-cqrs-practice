@@ -1,9 +1,9 @@
-# Scala Bootstrap (base / project skeleton)
+# Practice related to the CodelyTV course on DDD and CQRS with [Base Skeleton](https://github.com/CodelyTV/scala-basic-skeleton)
  
 [![Software License][ico-license]][link-license]
-[![Build Status][ico-travis]][link-travis]
- 
-## Introduction 
+[![Build Status][ico-travis]][link-travis] 
+
+## Introduction
 
 This is a repository intended to serve as a starting point if you want to bootstrap a project in Scala.
  
