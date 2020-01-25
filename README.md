@@ -3,32 +3,28 @@
 [![Software License][ico-license]][link-license]
 [![Build Status][ico-travis]][link-travis] 
 
+##### [Final CodelyTV course example](https://github.com/CodelyTV/scala-ddd-example) 
+
 ## Introduction
 
 This is a repository intended to serve as a starting point if you want to bootstrap a project in Scala.
  
 It could be useful if you want to start from scratch a kata or a little exercise or project. The idea is that you don't have to worry about the boilerplate, just clone this repo and there you go:
-* Latest versions of Scala, SBT and ScalaTest in order to practice with them
-* Best practices applied:
-  * [`README.md`][link-readme] (badges included)
-  * [`LICENSE`][link-license]
-  * [`build.sbt`][link-build-sbt]
-  * [`scalastyle-config.xml`][link-scalastyle-config]
-  * [`.scalafmt.conf`][link-scalafmt-config]
-  * [`.gitignore`][link-gitignore]
-  * [`.editorconfig`][link-editorconfig]
-  * [`.travis.yml`][link-travis-yml]
+* Latest versions of Scala, SBT and ScalaTest.
+
+## Preparation
+1. You must have the [JDK](https://www.oracle.com/technetwork/java/javase/downloads/jdk13-downloads-5672538.html) installed
+2. You must have the [SBT](https://www.scala-sbt.org/download.html) installed
 
 ## How To Start
 
-[Video screencast](http://codely.tv/screencasts/entorno-scala/) (in Spanish) 
-
-1. Clone this repository `git clone https://github.com/CodelyTV/scala_bootstrap`.
+1. Clone this repository `git clone https://github.com/adnumaro/scala-ddd-cqrs-practice.git`.
 2. Run [SBT](http://www.scala-sbt.org/) on the project directory `sbt`.
 3. Run the [scalatests](http://www.scalatest.org/) with `t`.
 4. Check the [scalastyle](http://www.scalastyle.org/) in the production code with `s` and use the `ts` command to check the test code style.
 5. Check the [scalaFmt](http://scalafmt.org) with `tf` command to check the code style and apply guidelines with `f`.
-6. Start your project!
+6. Run all the needed tasks using `prep`. 
+7. Start your project!
 
 ## Pre-push Git hook
 
@@ -39,18 +35,6 @@ This `prep` task is intended to run all the checks you consider before pushing. 
 You can define what this task does just modifying the `prep` task in the `build.sbt` file. We like the approach of just running 1 single SBT task as the hook instead of multiple tasks because it's more efficient (the hook doesn't has to run SBT multiple times), and also because this way we can control the pre push tasks just with the SBT alias defined at the `build.sbt` without altering the hooks.
  
 If you want to install this hook, just `cd doc/hooks` and run `./install-hooks.sh`.
-
-## Other programming languages
-
-* [Scala g8 template](https://github.com/CodelyTV/scala-bootstrap-template.g8) Useful to bootstrap your project with the `sbt new` command!
-* [PHP](https://github.com/CodelyTV/php-bootstrap)
-* [Scala](https://github.com/CodelyTV/scala_bootstrap)
-
-## About
-
-This hopefully helpful utility has been developed by [CodelyTV][link-author] and [contributors][link-contributors].
-
-We'll try to maintain this project as simple as possible, but Pull Requests are welcomed!
 
 ## License
 
